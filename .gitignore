@@ -1,0 +1,11 @@
+.env
+
+*.js
+bin/*.d.ts
+lib/*.d.ts
+test/*.d.ts
+!jest.config.js
+# *.d.ts
+node_modules
+
+.DS_Store
