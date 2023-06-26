@@ -99,8 +99,12 @@ const exportFromNotion = async (backupDir, format) => {
       responseType: 'stream'
     });
 
+    const now = dayjs();
+    const yyyymmdd = now.format('YYYY-MM-DD');
+    const fileName = `${format}-${yyyymmdd}.zip`;
+
     let stream = res.data.pipe(createWriteStream(join(process.cwd(),
-      `${backupDir}/${format}.zip`)));
+      `${backupDir}/${fileName}`)));
 
     await new Promise((resolve, reject) => {
       stream.on('close', resolve);
@@ -113,9 +117,7 @@ const exportFromNotion = async (backupDir, format) => {
 }
 
 const main = async () => {
-  const now = dayjs();
-  const yyyymmdd = now.format('YYYY-MM-DD');
-  const backupDir = `backups/${yyyymmdd}`;
+  const backupDir = `backups`;
   let cwd = process.cwd();
   mkdirSync(join(cwd, backupDir), { recursive: true });
 
